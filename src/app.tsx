@@ -1,4 +1,13 @@
-import { Button, Rows, Text } from "@canva/app-ui-kit";
+import {
+  Box,
+  Button,
+  FormField,
+  Grid,
+  ImageCard,
+  Rows,
+  Select,
+  Text,
+} from "@canva/app-ui-kit";
 import { addNativeElement } from "@canva/design";
 import styles from "styles/components.css";
 
@@ -20,7 +29,7 @@ export const App = () => {
           then close and reopen the app in the editor to preview the changes.
         </Text>
         <Button variant="primary" onClick={onClick} stretch>
-          Do something cool
+          KJSHDFL:KJHSDKLJFHSKDFLKS.
         </Button>
       </Rows>
     </div>
