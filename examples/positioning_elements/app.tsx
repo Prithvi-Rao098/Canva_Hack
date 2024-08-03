@@ -21,6 +21,9 @@ import { useCallback, useEffect, useState } from "react";
 import baseStyles from "styles/components.css";
 import { upload } from "@canva/asset";
 
+
+// __________________________________________________  //
+
 // Below values are only for demonstration purposes.0
 // You can position your elements anywhere on the page by providing arbitrary
 // values for placement attributes: top, left, width, height and rotation.
@@ -281,3 +284,7 @@ export const App = () => {
     </div>
   );
 };
+
+
+
+
