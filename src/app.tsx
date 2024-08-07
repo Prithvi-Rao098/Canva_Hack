@@ -1,49 +1,75 @@
-import { upload } from "@canva/asset";
-import { Button, Rows, Text } from "@canva/app-ui-kit";
-import { addNativeElement } from "@canva/design";
+import {
+  Button,
+  FormField,
+  Rows,
+  Select,
+  Text,
+  TypographyCard,
+} from "@canva/app-ui-kit";
+import {
+  addNativeElement,
+  ui,
+  FontWeight,
+  TextAttributes,
+} from "@canva/design";
+import { useState } from "react";
 import styles from "styles/components.css";
 
+type DraggableTextProperties = {
+  textAlign: TextAttributes["textAlign"];
+  fontWeight: FontWeight;
+  fontStyle: TextAttributes["fontStyle"];
+  decoration: TextAttributes["decoration"];
+};
 
-
-
+const watermarkContent = "This is a watermark";
 
 export const App = () => {
-  
-  async function handleClick() {
-    // Start uploading the media
-    const result = await upload({
-      type: "IMAGE",
-      mimeType: "image/jpeg",
-      url: "https://www.canva.dev/example-assets/image-import/image.jpg",
-      thumbnailUrl:
-        "https://www.canva.dev/example-assets/image-import/thumbnail.jpg",
-    });
+  const [{ fontStyle, fontWeight, decoration, textAlign }, setState] = useState<
+    Required<DraggableTextProperties>
+  >({
+    decoration: "none",
+    fontStyle: "normal",
+    fontWeight: "light",
+    textAlign: "center",
+  });
 
-    // Get the reference for the upload
-    console.log("The reference for the upload is:", result.ref);
-
-    // Wait for the upload to complete
-    await result.whenUploaded();
-    console.log("The upload is complete.");
-  }
-  const onClick = () => {
+  const addWatermark = () => {
     addNativeElement({
       type: "TEXT",
-      children: ["Hello world!"],
+      children: [watermarkContent],
+      fontWeight: fontWeight as FontWeight,
+      fontStyle: fontStyle as TextAttributes["fontStyle"],
+      decoration: decoration as TextAttributes["decoration"],
+      textAlign: textAlign as TextAttributes["textAlign"],
+      color: "#AAAAAA", // Subtle grey color for the watermark text
     });
   };
 
   return (
     <div className={styles.scrollContainer}>
-      <Rows spacing="2u">
+      <Rows spacing="4u">
         <Text>
-          To make changes to this app, edit the <code>src/app.tsx</code> file,
-          then close and reopen the app in the editor to preview the changes.
+          Use the form below to customize the watermark and then add it to the canvas.
         </Text>
-        <Button variant="primary" onClick={onClick} stretch>
-          Do something cool
-        </Button>
-        <button onClick={handleClick}>Upload image</button>
+        <Rows spacing="1.5u">
+          // FormFields remain the same
+          <TypographyCard
+            ariaLabel="Add text to design"
+            onClick={addWatermark}
+            onDragStart={addWatermark} // Enables dragging the watermark onto the canvas
+          >
+            <Text
+              variant={
+                ["semibold", "bold", "heavy"].includes(fontWeight)
+                  ? "bold"
+                  : "regular"
+              }
+            >
+              {watermarkContent}
+            </Text>
+          </TypographyCard>
+        </Rows>
       </Rows>
     </div>
   );
