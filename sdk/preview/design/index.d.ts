@@ -1514,6 +1514,7 @@ export declare type TextAttributes = {
    * @defaultValue 'none'
    */
   decoration?: "none" | "underline";
+
 };
 
 /**
