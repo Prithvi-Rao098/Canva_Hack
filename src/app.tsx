@@ -27,8 +27,7 @@ type AppElementData = {
   rotation: number;
   useCustomWidth: boolean;
   gridSize: number;
-  opacity: number;
-  imageUrl: string;  // Property to store image URL
+  imageUrl: string;  // store image URL
   spacing: number;   // Space between grid elements
   imageWidth: number; // Individual image width
   imageHeight: number; // Individual image height
@@ -47,7 +46,6 @@ const initialState: UIState = {
   rotation: 45,
   useCustomWidth: false,
   gridSize: 3,
-  opacity: 50,
   imageUrl: '',  // Initial empty string for image URL
   spacing: 100,    // Initial spacing between images
   imageWidth: 200, // Initial image width
@@ -76,7 +74,6 @@ const appElementClient = initAppElement<AppElementData>({
             width: data.imageWidth,
             height: data.imageHeight,
             ref: data.imageUrl,
-            opacity: data.opacity / 100,
           });
         } else {
           elements.push({
@@ -87,7 +84,6 @@ const appElementClient = initAppElement<AppElementData>({
             width: textWidth,
             height: textHeight,
             children: [data.text],
-            opacity: data.opacity / 100,
           });
         }
       }
@@ -111,7 +107,6 @@ export const App = () => {
     rotation,
     useCustomWidth,
     gridSize,
-    opacity,
     imageUrl,
     spacing,
     imageWidth,
@@ -177,23 +172,8 @@ export const App = () => {
             />
           )}
         />
+
       
-        <FormField
-          label="Opacity"
-          control={() => (
-            <Slider
-              value={opacity}
-              min={0}
-              max={100}
-              onChange={(value) => {
-                setState((prevState) => ({
-                  ...prevState,
-                  opacity: value,
-                }));
-              }}
-            />
-          )}
-        />
 
         <FormField
           label="Font style"
